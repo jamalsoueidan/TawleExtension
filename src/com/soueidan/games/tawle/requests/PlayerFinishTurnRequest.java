@@ -1,4 +1,4 @@
-package com.soueidan.games.tawle.requestHandlers;
+package com.soueidan.games.tawle.requests;
 
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +9,7 @@ import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.soueidan.games.tawle.core.TawleExtension;
 import com.soueidan.games.tawle.helpers.DiceHelper;
 
-public class PlayerFinishTurnRequestHandler extends BaseClientRequestHandler {
+public class PlayerFinishTurnRequest extends BaseClientRequestHandler {
 
 	static public String FINISHED = "player_finish_turn";
 	static public String NEXT_PLAYER_TURN = "next_player_turn";

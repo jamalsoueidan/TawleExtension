@@ -3,7 +3,7 @@ package com.soueidan.games.tawle.core;
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 import com.soueidan.games.tawle.eventHandlers.*;
-import com.soueidan.games.tawle.requestHandlers.*;
+import com.soueidan.games.tawle.requests.*;
 
 public class TawleExtension extends SFSExtension {
 	
@@ -16,11 +16,12 @@ public class TawleExtension extends SFSExtension {
 		trace("Loading TawleExtension");
 		
 		addEventHandler(SFSEventType.USER_JOIN_ROOM, PlayerJoinRoomEventHandler.class);
+		addEventHandler(SFSEventType.USER_DISCONNECT, PlayerLeaveRoomEventHandler.class);
 		
-		addRequestHandler(ChipMovedReqestHandler.CHIP_MOVED, ChipMovedReqestHandler.class);
-		addRequestHandler(PlayerFinishTurnRequestHandler.FINISHED, PlayerFinishTurnRequestHandler.class);
-		addRequestHandler(PlayerHomeRequestHandler.PLAYER_IS_HOME, PlayerHomeRequestHandler.class);
-
+		addRequestHandler(ChipMovedRequest.CHIP_MOVED, ChipMovedRequest.class);
+		addRequestHandler(PlayerFinishTurnRequest.FINISHED, PlayerFinishTurnRequest.class);
+		addRequestHandler(PlayerIsHomeRequest.PLAYER_IS_HOME, PlayerIsHomeRequest.class);
+		addRequestHandler(PlayerIsWinnerRequest.PLAYER_WIN_ROUND, PlayerIsWinnerRequest.class);
 		
 	}
 

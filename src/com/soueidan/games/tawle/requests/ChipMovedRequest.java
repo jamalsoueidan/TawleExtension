@@ -1,4 +1,4 @@
-package com.soueidan.games.tawle.requestHandlers;
+package com.soueidan.games.tawle.requests;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.soueidan.games.tawle.helpers.UserHelper;
 
-public class ChipMovedReqestHandler extends BaseClientRequestHandler {
+public class ChipMovedRequest extends BaseClientRequestHandler {
 
 	static public String CHIP_MOVED = "chip_moved";
 	

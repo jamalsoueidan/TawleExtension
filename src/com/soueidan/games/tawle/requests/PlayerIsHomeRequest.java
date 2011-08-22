@@ -1,4 +1,4 @@
-package com.soueidan.games.tawle.requestHandlers;
+package com.soueidan.games.tawle.requests;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.smartfoxserver.v2.exceptions.SFSVariableException;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.soueidan.games.tawle.helpers.UserHelper;
 
-public class PlayerHomeRequestHandler extends BaseClientRequestHandler {
+public class PlayerIsHomeRequest extends BaseClientRequestHandler {
 
 	static public String PLAYER_IS_HOME = "player_is_home";
 	@Override

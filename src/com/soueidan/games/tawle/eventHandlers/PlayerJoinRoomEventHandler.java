@@ -6,7 +6,10 @@ import com.smartfoxserver.v2.core.ISFSEvent;
 import com.smartfoxserver.v2.core.SFSEventParam;
 import com.smartfoxserver.v2.entities.*;
 import com.smartfoxserver.v2.entities.data.*;
+import com.smartfoxserver.v2.entities.variables.SFSUserVariable;
+import com.smartfoxserver.v2.entities.variables.UserVariable;
 import com.smartfoxserver.v2.exceptions.SFSException;
+import com.smartfoxserver.v2.exceptions.SFSVariableException;
 import com.smartfoxserver.v2.extensions.BaseServerEventHandler;
 import com.soueidan.games.tawle.core.TawleExtension;
 import com.soueidan.games.tawle.helpers.DiceHelper;
@@ -24,7 +27,7 @@ public class PlayerJoinRoomEventHandler extends BaseServerEventHandler {
 		
 		trace("Total users in the room:", totalUser);
 		if ( totalUser == 1 || totalUser == 2 ) {
-			user.isPlayer(currentRoom);
+			setUserVariables(currentRoom, user);
 		}
 		
 		if ( totalUser >= 2 ) {
@@ -43,6 +46,21 @@ public class PlayerJoinRoomEventHandler extends BaseServerEventHandler {
 			getApi().sendExtensionResponse(START_GAME, playerData, currentRoom.getUserList(), currentRoom, false);
 		}
 
+	}
+
+	private void setUserVariables(Room room, User user) {
+		trace("setUserVariables");
+		
+		user.isPlayer(room);
+		
+		UserVariable score = new SFSUserVariable("score", 0);
+		score.setHidden(false);
+		
+		try {
+			user.setVariable(score);
+		} catch (SFSVariableException err) {
+			trace(err.getMessage());
+		}
 	}
 
 }
