@@ -8,11 +8,12 @@ import com.smartfoxserver.v2.entities.variables.UserVariable;
 import com.smartfoxserver.v2.exceptions.SFSVariableException;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.soueidan.games.tawle.core.TawleExtension;
+import com.soueidan.games.tawle.helpers.*;
 
 public class PlayerIsWinnerRequest extends BaseClientRequestHandler {
 
-	static public String PLAYER_WIN_GAME = "player_win_game";
-	static public String PLAYER_WIN_ROUND = "player_win_round";
+	static public String PLAYER_WIN_GAME = "player_is_winner";
+	static public String PLAYER_WIN_ROUND = "player_new_round";
 	
 	@Override
 	public void handleClientRequest(User user, ISFSObject params) {
@@ -24,11 +25,11 @@ public class PlayerIsWinnerRequest extends BaseClientRequestHandler {
 		if ( !user.getVariable("isHome").getBoolValue() ) {
 			trace(user.getIpAddress(), "is cheating, he is not home, how can he be a winner");	
 		}
+				
+		int total = params.getInt("playerScore");
+		UserVariable score = new SFSUserVariable("score", total);
+		trace(user.getName(), "score", total);
 		
-		UserVariable score = user.getVariable("score");
-		int total = score.getIntValue() + 1;
-		
-		score = new SFSUserVariable("score", total);
 		try {
 			user.setVariable(score);
 		} catch (SFSVariableException err){
@@ -38,9 +39,13 @@ public class PlayerIsWinnerRequest extends BaseClientRequestHandler {
 		String action;
 		if ( total >= 5 ) {
 			trace("player won 5 times");
+					
 			action = PLAYER_WIN_GAME;
 		} else {
 			trace("player won the round");
+			
+			params = DiceHelper.assignValues(params);
+			
 			action = PLAYER_WIN_ROUND;
 		}
 		
