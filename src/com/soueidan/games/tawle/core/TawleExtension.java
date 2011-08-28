@@ -22,6 +22,7 @@ public class TawleExtension extends SFSExtension {
 		addRequestHandler(PlayerFinishTurnRequest.FINISHED, PlayerFinishTurnRequest.class);
 		addRequestHandler(PlayerIsHomeRequest.PLAYER_IS_HOME, PlayerIsHomeRequest.class);
 		addRequestHandler(PlayerIsWinnerRequest.PLAYER_WIN_ROUND, PlayerIsWinnerRequest.class);
+		addRequestHandler(PlayerIsWinnerRequest.PLAYER_WIN_GAME, PlayerIsWinnerRequest.class);
 		
 	}
 
