@@ -1,5 +1,8 @@
 
-bin/com/soueidan/games/tawle/requests/PlayerIsWinnerRequest.class
-bin/**
-bin/*.*
-bin/**/**/**/**/**/**
+bin/
+!cbin/
+bin/com/soueidan/games/tawle/core/TawleExtension.class
+
+bin/com/soueidan/games/tawle/helpers/DiceHelper.class
+
+bin/com/soueidan/games/tawle/core/TawleExtension.class
