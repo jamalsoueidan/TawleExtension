@@ -1,13 +1,11 @@
 package com.soueidan.games.tawle.requests;
 
-import java.util.Iterator;
-import java.util.List;
-
 import com.smartfoxserver.v2.entities.*;
 import com.smartfoxserver.v2.entities.data.*;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 import com.soueidan.games.tawle.core.TawleExtension;
 import com.soueidan.games.tawle.helpers.DiceHelper;
+import com.soueidan.games.tawle.helpers.UserHelper;
 
 public class PlayerFinishTurnRequest extends BaseClientRequestHandler {
 
@@ -22,10 +20,11 @@ public class PlayerFinishTurnRequest extends BaseClientRequestHandler {
 			trace(user.getIpAddress(), "is cheating");
 		}
 		
-		User playerTurn = getNextPlayer(playerTurnId);
-		trace("next player turn is", playerTurn.getId());
-		
 		Room room = getParentExtension().getParentRoom();
+		
+		User playerTurn = UserHelper.getNextPlayer(room, playerTurnId);
+		
+		trace("from ", user.getName(), "next player turn is", playerTurn.getId());
 		
 		TawleExtension.playerTurnId = playerTurn.getId();
 		
@@ -34,20 +33,4 @@ public class PlayerFinishTurnRequest extends BaseClientRequestHandler {
 		
 		getApi().sendExtensionResponse(NEXT_PLAYER_TURN, playerData, room.getUserList(), room, false);
 	}
-	
-	private User getNextPlayer(int playerTurnId) {
-		Room room = getParentExtension().getParentRoom();
-		List<User> players = room.getPlayersList();
-		Iterator<User> itr = players.iterator();
-		User user = null;
-		while(itr.hasNext()) {
-			user = itr.next();
-			if ( playerTurnId != user.getId() ) {
-				break;
-			}
-		}
-		
-		return user;
-	}
-
 }

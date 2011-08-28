@@ -1,7 +1,9 @@
 package com.soueidan.games.tawle.helpers;
 
+import java.util.Iterator;
 import java.util.List;
 
+import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
 
 public class UserHelper {
@@ -15,5 +17,19 @@ public class UserHelper {
 			}
 		}
 		return users;
+	}
+	
+	static public User getNextPlayer(Room room, int playerTurnId) {
+		List<User> players = room.getPlayersList();
+		Iterator<User> itr = players.iterator();
+		User user = null;
+		while(itr.hasNext()) {
+			user = itr.next();
+			if ( playerTurnId != user.getId() ) {
+				break;
+			}
+		}
+		
+		return user;
 	}
 }

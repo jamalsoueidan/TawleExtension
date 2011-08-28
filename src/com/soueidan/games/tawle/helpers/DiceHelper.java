@@ -11,14 +11,22 @@ public class DiceHelper {
 	static private int rightValue;
 	
 	static public ISFSObject generateValues() {
-		Random generator = new Random();
-		leftValue = generator.nextInt(6) + 1;
-		rightValue = generator.nextInt(6) + 1;
-		
 		ISFSObject dice = new SFSObject();
-		dice.putInt("leftValue", leftValue);
-		dice.putInt("rightValue", rightValue);
+		return assignValues(dice);
+	}
+	
+	static public ISFSObject assignValues(ISFSObject params) {
+		leftValue = generateValue();
+		rightValue = generateValue();
 		
-		return dice;
+		params.putInt("leftValue", leftValue);
+		params.putInt("rightValue", rightValue);
+		
+		return params;
+	}
+	
+	static public int generateValue() {
+		Random generator = new Random();
+		return generator.nextInt(6) + 1;
 	}
 }
